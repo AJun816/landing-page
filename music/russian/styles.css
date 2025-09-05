@@ -1,0 +1,472 @@
+/* 基础样式设置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    color: #fff;
+}
+
+/* 背景图样式 */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.background-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.5s ease;
+}
+
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 100%);
+}
+
+/* 主内容样式 */
+.main-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 80px;
+}
+
+/* 品牌样式 */
+.brand {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.brand-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.music-icon {
+    display: inline-block;
+    width: 40px;
+    height: 30px;
+    position: relative;
+}
+
+.music-icon::before, .music-icon::after {
+    content: '';
+    position: absolute;
+    background: #000;
+    border-radius: 5px;
+}
+
+.music-icon::before {
+    width: 100%;
+    height: 100%;
+}
+
+.music-icon::after {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    bottom: -8px;
+    right: -5px;
+}
+
+.brand-name {
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* 幸运用户标识 */
+.lucky-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    background: linear-gradient(90deg, #FF4500, #FF6347);
+    border-radius: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(255, 69, 0, 0.4);
+    animation: pulse 2s infinite;
+}
+
+.lucky-badge span {
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* 文本内容样式 */
+.content-text {
+    margin-bottom: 40px;
+}
+
+.main-title {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    line-height: 1.3;
+    text-shadow: 0 3px 6px rgba(0,0,0,0.3);
+}
+
+.main-desc {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #f0f0f0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.urgent-text {
+    font-size: 20px;
+    font-weight: bold;
+    color: #FF4500;
+    text-transform: uppercase;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    letter-spacing: 0.5px;
+}
+
+/* 倒计时样式 - 参考拼多多秒杀 */
+.countdown-container {
+    margin-bottom: 40px;
+}
+
+.countdown-label {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #f0f0f0;
+    font-weight: 500;
+}
+
+.countdown-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.time-box {
+    background: #fff;
+    border-radius: 8px;
+    padding: 15px 10px;
+    min-width: 100px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.time-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0,0,0,0.05) 50%, transparent 50%);
+    background-size: 100% 2px;
+}
+
+.time-number {
+    font-size: 48px;
+    font-weight: bold;
+    color: #e63946;
+    line-height: 1;
+}
+
+.time-unit {
+    display: block;
+    font-size: 14px;
+    color: #333;
+    font-weight: 600;
+}
+
+.time-box.milliseconds {
+    min-width: 120px;
+}
+
+.time-box.milliseconds .time-number {
+    font-size: 36px;
+    color: #1d3557;
+}
+
+.separator {
+    font-size: 40px;
+    color: #fff;
+    font-weight: bold;
+    margin: 0 5px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* 下载按钮样式 */
+.download-btn {
+    display: inline-block;
+    width: 100%;
+    max-width: 400px;
+    padding: 18px 20px;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #000;
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.download-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
+}
+
+/* 信任标识 */
+.trust-signal {
+    font-size: 14px;
+    color: #ccc;
+    margin-top: 10px;
+}
+
+/* 退出弹窗样式 */
+.exit-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.exit-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 30px;
+    max-width: 90%;
+    width: 400px;
+    text-align: center;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.exit-modal.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.modal-icon .music-icon {
+    width: 30px;
+    height: 22px;
+}
+
+.modal-title {
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.modal-message {
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.modal-btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.primary-btn {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #000;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.secondary-btn {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.modal-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 28px;
+    }
+
+    .urgent-text {
+        font-size: 18px;
+    }
+
+    .time-box {
+        min-width: 80px;
+        padding: 12px 8px;
+    }
+
+    .time-number {
+        font-size: 36px;
+    }
+
+    .time-box.milliseconds {
+        min-width: 90px;
+    }
+
+    .time-box.milliseconds .time-number {
+        font-size: 28px;
+    }
+
+    .download-btn {
+        font-size: 18px;
+        padding: 15px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .brand-icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .music-icon {
+        width: 30px;
+        height: 22px;
+    }
+
+    .brand-name {
+        font-size: 24px;
+    }
+
+    .lucky-badge {
+        padding: 6px 16px;
+    }
+
+    .lucky-badge span {
+        font-size: 12px;
+    }
+
+    .main-title {
+        font-size: 24px;
+    }
+
+    .main-desc {
+        font-size: 16px;
+    }
+
+    .time-box {
+        min-width: 65px;
+        padding: 10px 5px;
+    }
+
+    .time-number {
+        font-size: 28px;
+    }
+
+    .time-unit {
+        font-size: 12px;
+    }
+
+    .time-box.milliseconds {
+        min-width: 75px;
+    }
+
+    .countdown-display {
+        gap: 5px;
+    }
+
+    .modal-content {
+        padding: 20px;
+    }
+
+    .modal-title {
+        font-size: 20px;
+    }
+
+    .modal-message {
+        font-size: 14px;
+    }
+
+    .modal-btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
