@@ -1,14 +1,13 @@
-version: '3'
+version: '3.8'  # 指定Compose版本
 services:
-  nginx:
+  nginx:  # 服务名称
     image: nginx:latest
     ports:
-      - "80:80"   # 保留HTTP端口（用于重定向到HTTPS）
-      - "443:443" # 新增HTTPS端口映射
+      - "80:80"
+      - "443:443"
     volumes:
       - ./nginx-config/default.conf:/etc/nginx/conf.d/default.conf
       - ./src:/usr/share/nginx/html/src
       - ./assets:/usr/share/nginx/html/assets
-      # 挂载服务器上的证书到容器内（关键步骤）
-      - /root/.well-known/pki-validation/:/etc/nginx/ssl/  # 宿主机证书路径:容器内路径
+      - /root/.well-known/pki-validation/:/root/.well-known/pki-validation  # 添加只读权限
     restart: unless-stopped
