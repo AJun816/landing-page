@@ -1,71 +1,13 @@
-version: '3.8'
-
-networks:
-  landing-network:
-    driver: bridge
-
+version: '3'
 services:
-  # 1. Dreamy 风格页面
-  page-dreamy:
-    image: music-russian-landing-page  # 直接使用 deploy.sh 构建的基础镜像
-    container_name: music-landing-dreamy
-    volumes:
-      - ./assets/dreamy:/usr/share/nginx/html/src/assets/background  # 挂载 Dreamy 背景图
-    expose:
-      - "80"
-    networks:
-      - landing-network
-    restart: always
-
-  # 2. Passion 风格页面（同理，复用基础镜像）
-  page-passion:
-    image: music-russian-landing-page
-    container_name: music-landing-passion
-    volumes:
-      - ./assets/passion:/usr/share/nginx/html/src/assets/background
-    expose:
-      - "80"
-    networks:
-      - landing-network
-    restart: always
-
-  # 3. Tradition 风格页面（同理）
-  page-tradition:
-    image: music-russian-landing-page
-    container_name: music-landing-tradition
-    volumes:
-      - ./assets/tradition:/usr/share/nginx/html/src/assets/background
-    expose:
-      - "80"
-    networks:
-      - landing-network
-    restart: always
-
-  # 4. Tranquility 风格页面（同理）
-  page-tranquility:
-    image: music-russian-landing-page
-    container_name: music-landing-tranquility
-    volumes:
-      - ./assets/tranquility:/usr/share/nginx/html/src/assets/background
-    expose:
-      - "80"
-    networks:
-      - landing-network
-    restart: always
-
-  # 5. Nginx 反向代理（统一 80 端口）
-  nginx-proxy:
-    image: nginx:alpine
-    container_name: music-nginx-proxy
+  nginx:
+    image: nginx:latest
     ports:
-      - "80:80"
+      - "80:80"  # 宿主机80端口映射到容器80端口
     volumes:
+      # 挂载自定义Nginx配置
       - ./nginx-config/default.conf:/etc/nginx/conf.d/default.conf
-    depends_on:
-      - page-dreamy
-      - page-passion
-      - page-tradition
-      - page-tranquility
-    networks:
-      - landing-network
-    restart: always
+      # 挂载系统自带资源（含默认背景、index.html等）
+      - ./src:/usr/share/nginx/html/src
+      - ./assets:/usr/share/nginx/html/assets
+    restart: unless-stopped  # 容器异常时自动重启（除非手动停止）

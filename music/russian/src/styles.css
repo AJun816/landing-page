@@ -470,3 +470,12 @@ body {
         padding: 10px;
     }
 }
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    color: #fff;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}

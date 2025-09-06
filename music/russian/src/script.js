@@ -1,50 +1,36 @@
-// 倒计时功能 - 5分钟，显示到毫秒，参考拼多多秒杀风格
+// 1. 倒计时功能（独立函数）
 function startCountdown() {
-    // 设置倒计时为5分钟（5 * 60 * 1000毫秒）
-    let totalMilliseconds = 3 * 60 * 1000;
+    let totalMilliseconds = 3 * 60 * 1000; // 3分钟倒计时
     const minutesEl = document.getElementById('minutes');
     const secondsEl = document.getElementById('seconds');
     const millisecondsEl = document.getElementById('milliseconds');
 
     function updateTimer() {
-        // 计算剩余的分钟、秒和毫秒
         const minutes = Math.floor(totalMilliseconds / 60000);
         const seconds = Math.floor((totalMilliseconds % 60000) / 1000);
         const milliseconds = totalMilliseconds % 1000;
 
-        // 更新显示，确保格式正确
+        // 格式化显示
         minutesEl.textContent = minutes.toString().padStart(2, '0');
         secondsEl.textContent = seconds.toString().padStart(2, '0');
         millisecondsEl.textContent = milliseconds.toString().padStart(3, '0');
 
-        // 添加数字变化时的动画效果
-        if (milliseconds % 100 === 0) {
-            millisecondsEl.classList.add('pulse');
-            setTimeout(() => millisecondsEl.classList.remove('pulse'), 100);
-        }
+        // 数字变化动画
+        if (milliseconds % 100 === 0) millisecondsEl.classList.add('pulse');
+        setTimeout(() => millisecondsEl.classList.remove('pulse'), 100);
+        if (seconds % 5 === 0 && milliseconds < 10) secondsEl.classList.add('pulse');
+        setTimeout(() => secondsEl.classList.remove('pulse'), 200);
+        if (minutes % 1 === 0 && seconds === 0 && milliseconds < 10) minutesEl.classList.add('pulse');
+        setTimeout(() => minutesEl.classList.remove('pulse'), 300);
 
-        if (seconds % 5 === 0 && milliseconds < 10) {
-            secondsEl.classList.add('pulse');
-            setTimeout(() => secondsEl.classList.remove('pulse'), 200);
-        }
-
-        if (minutes % 1 === 0 && seconds === 0 && milliseconds < 10) {
-            minutesEl.classList.add('pulse');
-            setTimeout(() => minutesEl.classList.remove('pulse'), 300);
-        }
-
-        // 减少一毫秒
         totalMilliseconds--;
 
-        // 当倒计时结束时
+        // 倒计时结束逻辑
         if (totalMilliseconds < 0) {
             clearInterval(timerInterval);
-            // 倒计时结束后显示已结束状态
             minutesEl.textContent = '00';
             secondsEl.textContent = '00';
             millisecondsEl.textContent = '000';
-
-            // 更改按钮文本
             const downloadBtn = document.getElementById('downloadBtn');
             downloadBtn.textContent = 'Акция закончилась';
             downloadBtn.style.opacity = '0.7';
@@ -52,79 +38,75 @@ function startCountdown() {
         }
     }
 
-    // 立即更新一次
     updateTimer();
-    // 每毫秒更新一次（实际浏览器可能有最小间隔限制）
     const timerInterval = setInterval(updateTimer, 1);
 }
 
-// 退出弹窗功能
+// 2. 退出弹窗功能（独立函数）
 function setupExitModal() {
     const exitModal = document.getElementById('exitModal');
     const leaveBtn = document.getElementById('leaveBtn');
     const downloadBtn = document.getElementById('downloadBtn');
-
-    // 标记是否已点击下载按钮
     let downloadClicked = false;
 
-    // 监听下载按钮点击
-    downloadBtn.addEventListener('click', () => {
-        downloadClicked = true;
-    });
+    downloadBtn.addEventListener('click', () => { downloadClicked = true; });
 
-    // 显示弹窗
     function showModal() {
-        // 如果用户已经点击了下载按钮，则不显示弹窗
         if (downloadClicked) return;
-
         exitModal.classList.add('active');
-        document.body.style.overflow = 'hidden'; // 防止背景滚动
+        document.body.style.overflow = 'hidden';
     }
 
-    // 隐藏弹窗
     function hideModal() {
         exitModal.classList.remove('active');
-        document.body.style.overflow = ''; // 恢复滚动
+        document.body.style.overflow = '';
     }
 
-    // 按钮事件
     leaveBtn.addEventListener('click', () => {
         hideModal();
-        // 允许关闭页面
-        window.close();
-        // 如果浏览器阻止关闭，可导航到空白页
-        // setTimeout(() => window.location.href = 'about:blank', 100);
+        window.close(); // 或导航到空白页：setTimeout(() => window.location.href = 'about:blank', 100);
     });
 
-    // 监听页面关闭/刷新事件
     window.addEventListener('beforeunload', (e) => {
-        // 如果用户已经点击了下载按钮，则不显示弹窗
         if (downloadClicked) return;
-
-        // 显示自定义弹窗
         showModal();
-        // 大多数现代浏览器会忽略自定义消息
         e.preventDefault();
         e.returnValue = '';
         return '';
     });
 
-    // 按ESC键关闭弹窗
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && exitModal.classList.contains('active')) {
-            hideModal();
-        }
+        if (e.key === 'Escape' && exitModal.classList.contains('active')) hideModal();
     });
 }
 
-// 添加页面加载动画
+
+// 4. 页面加载动画（独立函数）
 function setupPageLoad() {
     document.body.classList.add('loaded');
 }
 
-// 页面加载完成后初始化
-document.addEventListener('DOMContentLoaded', () => {
-    startCountdown();
-    setupExitModal();
-    setupPageLoad();
-});
+/**
+ * 根据 URL 路径设置页面背景图
+ */
+function setBackgroundByUrl() {
+  const pathSegments = window.location.pathname.split("/").filter((s) => s);
+  const theme = pathSegments[0] || "default"; // 默认为 default 主题
+  const backgroundImgUrl = `/assets/${theme}/background.png`;
+
+  document.body.style.backgroundImage = `url("${backgroundImgUrl}")`;
+  document.body.style.backgroundRepeat = "no-repeat";
+  document.body.style.backgroundSize = "cover";
+  document.body.style.backgroundPosition = "center";
+}
+
+// 5. 总初始化函数（整合所有逻辑）
+function initPage() {
+    startCountdown();       // 启动倒计时
+    setupExitModal();       // 初始化退出弹窗
+    setupPageLoad();        // 处理页面加载动画
+    setBackgroundByUrl();   // 根据 URL 设置背景图
+}
+
+// 页面加载完成后，执行总初始化
+document.addEventListener('DOMContentLoaded', initPage);
