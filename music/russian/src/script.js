@@ -91,14 +91,21 @@ function setupPageLoad() {
  */
 function setBackgroundByUrl() {
   const pathSegments = window.location.pathname.split("/").filter((s) => s);
-  const theme = pathSegments[0] || "default"; // 默认为 default 主题
-  const backgroundImgUrl = `/assets/${theme}/background.png`;
+  const theme = pathSegments[0] || "default";
 
-  document.body.style.backgroundImage = `url("${backgroundImgUrl}")`;
-  document.body.style.backgroundRepeat = "no-repeat";
-  document.body.style.backgroundSize = "cover";
-  document.body.style.backgroundPosition = "center";
+  // 低清图（提前准备一张小图，命名 bg-small.webp）
+  const lowResImg = `/assets/${theme}/bg-small.webp`;
+  const highResImg = `/assets/${theme}/background.webp`;
+
+  document.body.style.backgroundImage = `url("${lowResImg}")`;
+
+  const img = new Image();
+  img.src = highResImg;
+  img.onload = () => {
+    document.body.style.backgroundImage = `url("${highResImg}")`;
+  };
 }
+
 
 // 5. 总初始化函数（整合所有逻辑）
 function initPage() {
