@@ -3,11 +3,12 @@ services:
   nginx:
     image: nginx:latest
     ports:
-      - "80:80"  # 宿主机80端口映射到容器80端口
+      - "80:80"   # 保留HTTP端口（用于重定向到HTTPS）
+      - "443:443" # 新增HTTPS端口映射
     volumes:
-      # 挂载自定义Nginx配置
       - ./nginx-config/default.conf:/etc/nginx/conf.d/default.conf
-      # 挂载系统自带资源（含默认背景、index.html等）
       - ./src:/usr/share/nginx/html/src
       - ./assets:/usr/share/nginx/html/assets
-    restart: unless-stopped  # 容器异常时自动重启（除非手动停止）
+      # 挂载服务器上的证书到容器内（关键步骤）
+      - /root/.well-known/pki-validation/:/etc/nginx/ssl/  # 宿主机证书路径:容器内路径
+    restart: unless-stopped
