@@ -32,7 +32,7 @@ export default {
     // 倒计时配置
     countdown: {
     label: 'Hurry! Offer ends in:', // 倒计时标签
-    totalSeconds: 86400, // 总倒计时秒数 (24小时)
+    totalSeconds: 1800, // 总倒计时秒数 (24小时)
     showDays: true, // 是否显示天数
     labels: { // 时间单位标签
     day: 'Days',

@@ -9,10 +9,13 @@
       }"
     ></div>
 
-    <!-- 背景覆盖层 -->
+    <!-- 背景覆盖层：结合opacity -->
     <div
         class="absolute inset-0"
-        :style="{ backgroundColor: overlayColor }"
+        :style="{
+      backgroundColor: props.overlayColor,
+      opacity: props.overlayOpacity
+    }"
     ></div>
   </div>
 </template>
@@ -21,14 +24,9 @@
 import {onMounted, ref} from 'vue';
 
 const props = defineProps({
-  backgroundImage: {
-    type: String,
-    required: true
-  },
-  overlayColor: {
-    type: String,
-    default: 'rgba(0, 0, 0, 0.5)'
-  }
+  backgroundImage: { type: String, required: true },
+  overlayColor: { type: String, default: 'rgba(0, 0, 0, 0.5)' },
+  overlayOpacity: { type: Number, default: 1 } // 新增：控制覆盖层透明度
 });
 
 // 图片加载状态

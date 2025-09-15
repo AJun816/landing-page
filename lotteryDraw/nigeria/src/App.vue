@@ -1,7 +1,8 @@
 <template>
+  <div class="bg-red-400 w-1/2 h-1.5"></div>
   <!-- 背景组件 -->
   <Background
-      :image-url="config.background.imageUrl"
+      :background-image="config.background.imageUrl"
       :overlay-color="config.background.overlayColor"
       :overlay-opacity="config.background.overlayOpacity"
   />

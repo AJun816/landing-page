@@ -43,14 +43,16 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 
+// 修正1：将 props 从 endTime 改为 totalSeconds（总秒数）
 const props = defineProps({
   label: {
     type: String,
     default: 'Hurry! Offer ends in:'
   },
-  endTime: {
-    type: Date,
-    required: true
+  totalSeconds: {  // 接收父组件传递的总秒数
+    type: Number,
+    required: true,
+    validator: (value) => value >= 0  // 确保秒数为非负数
   },
   showDays: {
     type: Boolean,
@@ -81,13 +83,15 @@ const minutes = ref(0);
 const seconds = ref(0);
 let timer = null;
 
-// 计算倒计时
+// 修正2：基于总秒数计算倒计时（替代原日期差计算）
 const calculateCountdown = () => {
-  const now = new Date();
-  const end = new Date(props.endTime);
-  const diff = end - now;
+  // 初始总秒数（首次计算时赋值）
+  if (seconds.value === 0 && timer === null) {
+    seconds.value = props.totalSeconds;
+  }
 
-  if (diff <= 0) {
+  // 秒数耗尽时停止
+  if (seconds.value <= 0) {
     days.value = 0;
     hours.value = 0;
     minutes.value = 0;
@@ -96,21 +100,29 @@ const calculateCountdown = () => {
     return;
   }
 
-  days.value = Math.floor(diff / (1000 * 60 * 60 * 24));
-  hours.value = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  minutes.value = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-  seconds.value = Math.floor((diff % (1000 * 60)) / 1000);
+  // 从总秒数中拆分天/时/分/秒
+  const total = seconds.value;
+  days.value = Math.floor(total / (60 * 60 * 24));
+  const remainingAfterDays = total % (60 * 60 * 24);
+
+  hours.value = Math.floor(remainingAfterDays / (60 * 60));
+  const remainingAfterHours = remainingAfterDays % (60 * 60);
+
+  minutes.value = Math.floor(remainingAfterHours / 60);
+  seconds.value = remainingAfterHours % 60;
+
+  // 每秒递减
+  seconds.value--;
 };
 
 // 启动倒计时
 onMounted(() => {
-  calculateCountdown();
-  timer = setInterval(calculateCountdown, 1000);
+  calculateCountdown();  // 初始化
+  timer = setInterval(calculateCountdown, 1000);  // 每秒更新
 });
 
-// 清理定时器
+// 清理定时器（防止内存泄漏）
 onUnmounted(() => {
   if (timer) clearInterval(timer);
 });
 </script>
-
