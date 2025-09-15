@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-red-400 w-1/2 h-1.5"></div>
+  <div class="bg-red-400 w-1/2 h-1.5">Test</div>
   <!-- 背景组件 -->
   <Background
       :background-image="config.background.imageUrl"
