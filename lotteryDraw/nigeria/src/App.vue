@@ -21,19 +21,12 @@
         :cta-button-url="config.content.ctaButton.url"
         @cta-click="handleCtaClick"
     />
-
-    <!-- 倒计时组件 -->
-    <Countdown
+    <CountdownRing
         :label="config.countdown.label"
-        :total-seconds="config.countdown.totalSeconds"
-        :show-days="config.countdown.showDays"
-        :day-label="config.countdown.labels.day"
-        :hour-label="config.countdown.labels.hour"
-        :minute-label="config.countdown.labels.minute"
-        :second-label="config.countdown.labels.second"
+        :totalDuration="config.countdown.totalDuration"
+        :labels="config.countdown.labels"
     />
   </main>
-
   <!-- 退出确认组件 -->
   <ExitConfirm
       :title="config.exitConfirm.title"
@@ -58,11 +51,11 @@
 <script setup>
 import { ref } from 'vue';
 import Background from './components/background/BackgroundDefault.vue';
-import Countdown from './components/countdown/CountdownDefault.vue';
 import Content from './components/content/ContentDefault.vue';
 import ExitConfirm from './components/exitconfirm/ExitConfirmDefault.vue';
 import Redirect from './components/redirect/RedirectDefault.vue';
 import config from '/landing.config.js';
+import CountdownRing from "@/components/countdown/CountdownRing.vue";
 
 // 重定向组件引用
 const redirectComponent = ref(null);
