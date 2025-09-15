@@ -20,12 +20,16 @@
         :cta-button-text="config.content.ctaButton.text"
         :cta-button-url="config.content.ctaButton.url"
         @cta-click="handleCtaClick"
-    />
-    <CountdownRing
-        :label="config.countdown.label"
-        :totalDuration="config.countdown.totalDuration"
-        :labels="config.countdown.labels"
-    />
+    >
+      <template v-slot:after-subtitle>
+        <CountdownRing
+            :label="config.countdown.label"
+            :totalDuration="config.countdown.totalDuration"
+            :labels="config.countdown.labels"
+        />
+      </template>
+    </Content>
+
   </main>
   <!-- 退出确认组件 -->
   <ExitConfirm

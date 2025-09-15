@@ -21,18 +21,21 @@
     </h1>
 
     <!-- 副标题 - 带闪烁强调 -->
-    <h2 class="text-xl md:text-2xl font-semibold mb-8 text-yellow-300 relative inline-block">
+    <h2 class="text-xl md:text-2xl font-semibold mb-4 text-yellow-300 relative inline-block">
       <span class="relative z-10">{{ subtitle }}</span>
       <span class="absolute bottom-0 left-0 w-full h-1 bg-yellow-400 opacity-70 transform -translate-y-1 animate-pulse"></span>
     </h2>
 
-    <!-- 描述文本 -->
-    <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed text-gray-100">
+    <!-- 插槽：主副标题下方，用于插入倒计时等组件（小屏幕也会显示） -->
+    <slot name="after-subtitle"></slot>
+
+    <!-- 描述文本：仅中等及以上屏幕显示 -->
+    <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed text-gray-100 hidden md:block">
       {{ description }}
     </p>
 
-    <!-- 列表项 - 逐项淡入动画 -->
-    <div class="max-w-lg mx-auto mb-10">
+    <!-- 列表项：仅中等及以上屏幕显示，逐项淡入动画 -->
+    <div class="max-w-lg mx-auto mb-10 hidden md:block">
       <ul class="space-y-4">
         <li
             v-for="(point, index) in bulletPoints"
@@ -46,7 +49,7 @@
       </ul>
     </div>
 
-    <!-- CTA按钮 - 带脉冲和放大效果 -->
+    <!-- CTA按钮 - 带脉冲和放大效果（始终显示） -->
     <a
         :href="ctaButtonUrl"
         @click.prevent="$emit('cta-click')"
