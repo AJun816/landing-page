@@ -1,51 +1,29 @@
 <template>
   <!-- 背景组件 -->
-  <Background
-      :background-image="config.background.imageUrl"
-      :overlay-color="config.background.overlayColor"
-      :overlay-opacity="config.background.overlayOpacity"
-  />
+  <Background :background-image="config.background.imageUrl" :overlay-color="config.background.overlayColor"
+    :overlay-opacity="config.background.overlayOpacity" />
 
   <!-- 主内容容器 -->
   <main class="relative z-10 min-h-screen flex flex-col items-center justify-center p-4 max-w-4xl mx-auto">
     <!-- 内容组件 -->
-    <Content
-        :logo-url="config.logo.url"
-        :logo-alt="config.logo.alt"
-        :title="config.content.title"
-        :subtitle="config.content.subtitle"
-        :description="config.content.description"
-        :bullet-points="config.content.bulletPoints"
-        :cta-button-text="config.content.ctaButton.text"
-        :cta-button-url="config.content.ctaButton.url"
-        @cta-click="handleCtaClick"
-    >
+    <Content :logo-url="config.logo.url" :logo-alt="config.logo.alt" :title="config.content.title"
+      :subtitle="config.content.subtitle" :description="config.content.description"
+      :bullet-points="config.content.bulletPoints" :cta-button-text="config.content.ctaButton.text"
+      :cta-button-url="config.content.ctaButton.url" @cta-click="handleCtaClick">
       <template v-slot:after-subtitle>
-        <LEDCountdown :config="config.countdown"
-        />
+      <LEDCountdown :config="config.countdown"/>
       </template>
     </Content>
-
   </main>
   <!-- 退出确认组件 -->
-  <ExitConfirm
-      :title="config.exitConfirm.title"
-      :message="config.exitConfirm.message"
-      :stay-button-text="config.exitConfirm.stayButtonText"
-      :leave-button-text="config.exitConfirm.leaveButtonText"
-      @stay="handleStay"
-      @leave="handleLeave"
-  />
+  <ExitConfirm :title="config.exitConfirm.title" :message="config.exitConfirm.message"
+    :stay-button-text="config.exitConfirm.stayButtonText" :leave-button-text="config.exitConfirm.leaveButtonText"
+    @stay="handleStay" @leave="handleLeave" />
 
   <!-- 自动重定向组件 -->
-  <Redirect
-      ref="redirectComponent"
-      :target-url="config.redirect.targetUrl"
-      :countdown-seconds="config.redirect.countdownSeconds"
-      :message="config.redirect.message"
-      :seconds-label="config.redirect.secondsLabel"
-      :allow-skip="config.redirect.allowSkip"
-  />
+  <Redirect ref="redirectComponent" :target-url="config.redirect.targetUrl"
+    :countdown-seconds="config.redirect.countdownSeconds" :message="config.redirect.message"
+    :seconds-label="config.redirect.secondsLabel" :allow-skip="config.redirect.allowSkip" />
 </template>
 
 <script setup>
@@ -55,7 +33,7 @@ import Content from './components/content/ContentDefault.vue';
 import ExitConfirm from './components/exitconfirm/ExitConfirmDefault.vue';
 import Redirect from './components/redirect/RedirectDefault.vue';
 import config from '/landing.config.js';
-import LEDCountdown from "@/components/countdown/LEDCountdown.vue";
+import LEDCountdown from './components/countdown/LEDCountdown.vue';
 
 // 重定向组件引用
 const redirectComponent = ref(null);
@@ -104,6 +82,7 @@ const handleLeave = () => {
     transform: scale(0.8);
     opacity: 0;
   }
+
   100% {
     transform: scale(1);
     opacity: 1;

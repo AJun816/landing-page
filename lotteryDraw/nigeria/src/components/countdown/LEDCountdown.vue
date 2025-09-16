@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-col items-center justify-center space-y-6 p-6 rounded-2xl shadow-2xl">
+  <div class="flex flex-col items-center justify-center space-y-6 p-6 rounded-2xl">
     <!-- 闪烁标题 -->
-    <h1 class="text-2xl font-bold text-red-500 animate-blink">
+    <h1 class="text-2xl font-bold text-red-500 animate-bounce">
       {{ config.label }}
     </h1>
 

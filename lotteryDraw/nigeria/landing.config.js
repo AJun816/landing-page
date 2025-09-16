@@ -1,9 +1,9 @@
 export default {
     // 背景配置
     background: {
-        imageUrl: 'https://picsum.photos/id/1043/1920/1080', // 背景图URL
+        imageUrl: require('./src/assets/background.png'), // 背景图URL (使用require确保正确加载)
         overlayColor: '#000000', // 覆盖层颜色
-        overlayOpacity: 0.6 // 覆盖层透明度 (0-1)
+        overlayOpacity: 0.3 // 覆盖层透明度 (0-1)
     },
 
     // Logo配置
@@ -16,18 +16,17 @@ export default {
     content: {
         title: 'Exclusive Limited Time Offer', // 主标题
         subtitle: 'Only for our valued customers', // 副标题
-        description: 'Claim your special discount before it expires. This offer is available for a limited time only, so act fast!', // 描述文本
+        description: 'Claim your special discount before it expires', // 描述文本
         bulletPoints: [ // 要点列表
             'Instant access to exclusive deals',
-            'No hidden fees or charges',
-            'Special bonus for first-time users',
-            '24/7 customer support'
+            'No hidden fees or charges'
         ],
         ctaButton: {
             text: 'Claim Your Offer Now', // 按钮文本
             url: 'https://example.com/offer' // 按钮链接
         }
     },
+    // 倒计时配置
     countdown: {
         label: '🔥 活动火热进行中！倒计时 🔥', // 倒计时标题
         totalDuration: 60000, // 总时长，毫秒为单位
@@ -37,7 +36,29 @@ export default {
             millisecond: '毫秒' // 可替换成 Ms / 毫秒 / Millisekunden / Milisegundos
         }
     },
-
+    // 老虎机配置
+    slotMachine: {
+        title: "🎰 幸运老虎机 🎰",
+        buttonText: "抽奖",
+        reels: [
+            ["🍒", "🍋", "🍊", "⭐", "💎"],
+            ["🍒", "🍋", "🍊", "⭐", "💎"],
+            ["🍒", "🍋", "🍊", "⭐", "💎"]
+        ]
+    },
+    // 大转盘
+    prizeWheel: {
+        title: "🎡 幸运大转盘 🎡",
+        buttonText: "开始抽奖",
+        segments: [
+            { label: "🎁 奖品A" },
+            { label: "🎉 奖品B" },
+            { label: "💎 奖品C" },
+            { label: "🍀 奖品D" },
+            { label: "⭐ 奖品E" },
+            { label: "🎊 奖品F" }
+        ]
+    },
     // 退出确认配置
     exitConfirm: {
         title: 'Wait! Don\'t Leave', // 弹窗标题
