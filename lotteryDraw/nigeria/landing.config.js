@@ -48,7 +48,7 @@ export default {
 
     // 自动重定向配置
     redirect: {
-        targetUrl: 'https://example.com/offer', // 重定向目标URL
+        targetUrl: 'www.baidu.com', // 重定向目标URL
         countdownSeconds: 3, // 倒计时秒数
         message: 'You will be redirected in:', // 倒计时消息
         secondsLabel: 'seconds', // 秒数标签

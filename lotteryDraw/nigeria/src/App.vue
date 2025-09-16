@@ -1,5 +1,4 @@
 <template>
-  <div class="bg-red-400 w-1/2 h-1.5">Test</div>
   <!-- 背景组件 -->
   <Background
       :background-image="config.background.imageUrl"
@@ -22,10 +21,7 @@
         @cta-click="handleCtaClick"
     >
       <template v-slot:after-subtitle>
-        <CountdownRing
-            :label="config.countdown.label"
-            :totalDuration="config.countdown.totalDuration"
-            :labels="config.countdown.labels"
+        <LEDCountdown :config="config.countdown"
         />
       </template>
     </Content>
@@ -59,7 +55,7 @@ import Content from './components/content/ContentDefault.vue';
 import ExitConfirm from './components/exitconfirm/ExitConfirmDefault.vue';
 import Redirect from './components/redirect/RedirectDefault.vue';
 import config from '/landing.config.js';
-import CountdownRing from "@/components/countdown/CountdownRing.vue";
+import LEDCountdown from "@/components/countdown/LEDCountdown.vue";
 
 // 重定向组件引用
 const redirectComponent = ref(null);
