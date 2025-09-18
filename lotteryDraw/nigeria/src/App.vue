@@ -16,18 +16,19 @@
     </Content>
   </main>
   <!-- 退出确认组件 -->
-  <ExitConfirm :title="config.exitConfirm.title" :message="config.exitConfirm.message"
+  <ExitConfirm :show-modal="showExitConfirmModal" :title="config.exitConfirm.title" :message="config.exitConfirm.message"
     :stay-button-text="config.exitConfirm.stayButtonText" :leave-button-text="config.exitConfirm.leaveButtonText"
     @stay="handleStay" @leave="handleLeave" />
 
   <!-- 自动重定向组件 -->
   <Redirect ref="redirectComponent" :target-url="config.redirect.targetUrl"
     :countdown-seconds="config.redirect.countdownSeconds" :message="config.redirect.message"
-    :seconds-label="config.redirect.secondsLabel" :allow-skip="config.redirect.allowSkip" />
+    :seconds-label="config.redirect.secondsLabel" :allow-skip="config.redirect.allowSkip"
+    :skip-button-text="config.redirect.skipButtonText" />
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import Background from './components/background/BackgroundDefault.vue';
 import Content from './components/content/ContentDefault.vue';
 import ExitConfirm from './components/exitconfirm/ExitConfirmDefault.vue';
@@ -37,6 +38,9 @@ import LEDCountdown from './components/countdown/LEDCountdown.vue';
 
 // 重定向组件引用
 const redirectComponent = ref(null);
+
+// 退出确认弹窗状态
+const showExitConfirmModal = ref(false);
 
 // 处理CTA按钮点击
 const handleCtaClick = () => {
@@ -48,15 +52,36 @@ const handleCtaClick = () => {
 
 // 处理用户选择留下
 const handleStay = () => {
+  showExitConfirmModal.value = false;
   console.log('User chose to stay');
   // 可以添加留下后的逻辑，如显示额外优惠等
 };
 
 // 处理用户选择离开
 const handleLeave = () => {
+  showExitConfirmModal.value = false;
   console.log('User chose to leave');
-  // 可以添加离开前的最后挽留逻辑
+  // 用户明确选择离开后允许页面跳转
+  window.removeEventListener('beforeunload', handleBeforeUnload);
 };
+
+// 处理页面离开前事件
+const handleBeforeUnload = (e) => {
+  e.preventDefault();
+  showExitConfirmModal.value = true;
+  // Chrome需要返回一个值
+  e.returnValue = '';
+};
+
+onMounted(() => {
+  // 监听页面离开前事件
+  window.addEventListener('beforeunload', handleBeforeUnload);
+});
+
+onUnmounted(() => {
+  // 清理事件监听
+  window.removeEventListener('beforeunload', handleBeforeUnload);
+});
 </script>
 
 <style>

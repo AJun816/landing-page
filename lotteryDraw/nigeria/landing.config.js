@@ -69,10 +69,11 @@ export default {
 
     // 自动重定向配置
     redirect: {
-        targetUrl: 'www.baidu.com', // 重定向目标URL
-        countdownSeconds: 3, // 倒计时秒数
+        targetUrl: 'https://www.bing.com/', // 重定向目标URL
+        countdownSeconds: 180, // 倒计时秒数
         message: 'You will be redirected in:', // 倒计时消息
         secondsLabel: 'seconds', // 秒数标签
-        allowSkip: true // 是否允许手动跳过
+        allowSkip: true, // 是否允许手动跳过
+        skipButtonText: 'Skip →' // 跳过按钮文本
     }
 };

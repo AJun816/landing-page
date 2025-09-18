@@ -23,14 +23,14 @@
       <!-- 按钮 -->
       <div class="flex flex-col sm:flex-row gap-4">
         <button
-            @click="$emit('stay')"
+            @click="emit('stay')"
             class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition-colors transform hover:scale-105"
         >
           {{ stayButtonText }}
         </button>
 
         <button
-            @click="$emit('leave')"
+            @click="emit('leave')"
             class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-6 rounded-lg transition-colors"
         >
           {{ leaveButtonText }}
@@ -64,6 +64,6 @@ const props = defineProps({
   }
 });
 
-const emits = defineEmits(['stay', 'leave']);
+const emit = defineEmits(['stay', 'leave']);
 </script>
 
