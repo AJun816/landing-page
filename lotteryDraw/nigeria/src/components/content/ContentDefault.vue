@@ -24,7 +24,7 @@
     <!-- CTA按钮 - 美化样式，悬浮在最适合点击的位置 -->
     <div class="mt-8 mb-6 relative animate-pulse">
       <a :href="ctaButtonUrl" @click.prevent="$emit('cta-click')"
-        class="inline-block bg-gradient-to-r from-red-600 to-red-700 text-white font-bold text-lg md:text-xl py-4 px-12 rounded-full shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-red-500/40 hover:shadow-3xl focus:outline-none focus:ring-4 focus:ring-red-400 focus:ring-opacity-50 relative overflow-hidden group z-20">
+        class="inline-block bg-gradient-to-r from-yellow-400 to-orange-600 text-white font-bold text-xl md:text-2xl py-5 px-16 rounded-full shadow-3xl transform transition-all duration-300 hover:scale-105 hover:shadow-orange-500/60 hover:shadow-4xl focus:outline-none focus:ring-6 focus:ring-orange-400 focus:ring-opacity-70 relative overflow-hidden group z-30 animate-pulse">
         <span class="relative z-10 flex items-center justify-center gap-2">
           {{ ctaButtonText }}
           <i class="fa fa-arrow-right transition-transform group-hover:translate-x-1 animate-pulse-slow"></i>
@@ -34,14 +34,14 @@
           class="absolute inset-0 bg-white/10 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
         <!-- 外部发光效果 -->
         <span
-          class="absolute -inset-1 bg-gradient-to-r from-red-400 to-yellow-400 rounded-full blur-md opacity-40 group-hover:opacity-80 transition duration-1000"></span>
+          class="absolute -inset-2 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full blur-lg opacity-60 group-hover:opacity-90 transition duration-500"></span>
         <!-- 脉冲波纹效果 -->
         <span
           class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-full w-full bg-white/20 rounded-full animate-ping-slow pointer-events-none"></span>
       </a>
       <!-- 装饰性光晕 -->
       <div
-        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-40 w-40 bg-red-600 rounded-full blur-3xl opacity-20 animate-pulse-slow z-10">
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-60 w-60 bg-orange-500 rounded-full blur-3xl opacity-30 animate-pulse-slow z-10">
       </div>
     </div>
 

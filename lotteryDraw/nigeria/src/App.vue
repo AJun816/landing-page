@@ -24,7 +24,7 @@
   <Redirect ref="redirectComponent" :target-url="config.redirect.targetUrl"
     :countdown-seconds="config.redirect.countdownSeconds" :message="config.redirect.message"
     :seconds-label="config.redirect.secondsLabel" :allow-skip="config.redirect.allowSkip"
-    :skip-button-text="config.redirect.skipButtonText" />
+    :skip-button-text="config.redirect.skipButtonText" @skip="handleRedirectSkip" @auto-redirect="handleAutoRedirect" />
 </template>
 
 <script setup>
@@ -44,10 +44,19 @@ const showExitConfirmModal = ref(false);
 
 // 处理CTA按钮点击
 const handleCtaClick = () => {
+  // 移除beforeunload事件监听器，确保点击按钮时不会显示退出确认弹窗
+  window.removeEventListener('beforeunload', handleBeforeUnload);
+  
   // 点击按钮时立即重定向
   if (redirectComponent.value) {
     redirectComponent.value.skipCountdown();
   }
+};
+
+// 处理重定向组件的skip事件
+const handleRedirectSkip = () => {
+  // 移除beforeunload事件监听器，确保点击skip按钮时不会显示浏览器默认的离开确认弹窗
+  window.removeEventListener('beforeunload', handleBeforeUnload);
 };
 
 // 处理用户选择留下

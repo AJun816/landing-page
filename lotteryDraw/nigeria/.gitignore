@@ -1,23 +1,37 @@
-.DS_Store
-node_modules
-/dist
+# 系统相关文件
+.DS_Store               # macOS 隐藏文件
+Thumbs.db               # Windows 缩略图缓存（补充：覆盖Windows场景）
 
+# 依赖与构建目录
+node_modules/           # 依赖安装目录（保留一个即可，清理重复）
+/dist                   # 生产环境构建产物
+/.output                # 部分框架（如Nuxt）的构建目录（补充）
+/.build                 # 自定义构建临时目录（补充，按需调整）
 
-# local env files
+# 本地环境变量（敏感信息）
 .env.local
 .env.*.local
+.env                    # 补充：若根目录有.env文件也需忽略（避免敏感信息泄露）
 
-# Log files
+# 日志与缓存文件
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+.npm                    # npm 缓存目录（补充）
+.yarn/cache             # yarn 缓存目录（补充）
+.yarn/unplugged         # yarn 解压后的依赖缓存（补充）
 
-# Editor directories and files
-.idea
-.vscode
+# 编辑器配置（按需调整：若团队共享VS Code配置，可删除 .vscode/ 但保留 .vscode/extensions.json 等）
+.idea                   # IntelliJ 系列编辑器配置
+.vscode/                # VS Code 配置目录（默认忽略，若需共享可改为 .vscode/* !.vscode/extensions.json）
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
-*.sw?
+*.sw?                   # Vim 临时文件
+
+# 测试与文档临时文件（补充）
+/coverage               # 测试覆盖率报告目录
+/docs/node_modules      # 文档依赖（如VuePress的依赖）
+.tmp                    # 临时文件目录
