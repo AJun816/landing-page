@@ -14,12 +14,15 @@ export default {
 
     // 内容配置 - 尼日利亚市场
     content: {
-        title: ' ', // 主标题
-        subtitle: '', // 副标题
+        title: 'iPhone 14, 13 Pro, Inverter AC, iWATCH, EARPOD', // 主标题
+        subtitle: 'Exciting prizes for lucky winners', // 副标题
         description: '', // 描述文本
         bulletPoints: [ // 要点列表
             'iPhone 14, 13 Pro, Inverter AC, iWATCH, EARPOD',
-            'Exciting prizes for lucky winners'
+            'Exciting prizes for lucky winners',
+            "🎯 'I won an iPhone 14 last month! This platform is amazing!' - Aisha, Lagos",
+            "🚀 'Got my Inverter AC just in time for the hot season. Thank you!' - Chinedu, Abuja",
+            "🌟 'My sister won an iWatch and I'm already a winner too!' - Amara, Port Harcourt"
         ],
         ctaButton: {
             text: 'SUBSCRIBE', // 按钮文本
