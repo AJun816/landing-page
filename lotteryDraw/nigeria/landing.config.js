@@ -18,11 +18,9 @@ export default {
         subtitle: 'Exciting prizes for lucky winners', // 副标题
         description: '', // 描述文本
         bulletPoints: [ // 要点列表
-            'iPhone 14, 13 Pro, Inverter AC, iWATCH, EARPOD',
-            'Exciting prizes for lucky winners',
-            "🎯 'I won an iPhone 14 last month! This platform is amazing!' - Aisha, Lagos",
-            "🚀 'Got my Inverter AC just in time for the hot season. Thank you!' - Chinedu, Abuja",
-            "🌟 'My sister won an iWatch and I'm already a winner too!' - Amara, Port Harcourt"
+            "🎯 'I won an iPhone 14 from the lucky draw last week! It only took me 2 minutes to enter. So easy and real!' - Aisha, Lagos",
+            "🚀 'My whole family loves this platform! I won an Inverter AC in May, and my brother just got an iWatch last week. The odds are really good!' - Chinedu, Abuja",
+            "🌟 'I couldn't believe it when I received my EarPods! The draw is transparent and the prizes are delivered fast. Over 30 people in my neighborhood have already won!' - Amara, Port Harcourt"
         ],
         ctaButton: {
             text: 'SUBSCRIBE', // 按钮文本
