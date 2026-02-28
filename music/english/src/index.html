@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Exclusive Music Access</title>
+    <meta name="description" content="You are a lucky user! Limited offer for music access — don't miss it!">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="preload" as="image" href="/assets/default/background.png">
+    <link rel="preload" as="image" href="/assets/passion/background.png">
+    <link rel="preload" as="image" href="/assets/dreamy/background.png">
+    <link rel="preload" as="image" href="/assets/tradition/background.png">
+    <link rel="preload" as="image" href="/assets/tranquility/background.png">
+    <script src="/script.js"></script>
+</head>
+<body>
+<!-- Background container -->
+<div class="background-container">
+    <!-- Overlay only -->
+    <div class="background-overlay"></div>
+</div>
+
+<!-- Main content -->
+<main class="main-content">
+    <div class="brand">
+        <div class="brand-icon">
+            <i class="music-icon"></i>
+        </div>
+        <h1 class="brand-name">MUSIC HUB</h1>
+    </div>
+
+    <div class="lucky-badge">
+        <span>LUCKY USER</span>
+    </div>
+
+    <div class="content-text">
+        <h2 class="main-title">Exclusive Access<br>Just for You</h2>
+        <p class="main-desc">Limited offer! In the next 3 minutes only, you can get full music access completely free.</p>
+        <p class="urgent-text">MISS IT — AND IT'S GONE FOREVER!</p>
+    </div>
+
+    <div class="countdown-container">
+        <p class="countdown-label">Offer ends in:</p>
+        <div class="countdown-display">
+            <div class="time-box">
+                <span id="minutes" class="time-number">05</span>
+                <span class="time-unit">Min</span>
+            </div>
+            <span class="separator">:</span>
+            <div class="time-box">
+                <span id="seconds" class="time-number">00</span>
+                <span class="time-unit">Sec</span>
+            </div>
+            <span class="separator">:</span>
+            <div class="time-box milliseconds">
+                <span id="milliseconds" class="time-number">000</span>
+                <span class="time-unit">Ms</span>
+            </div>
+        </div>
+    </div>
+
+    <a href="https://musics.htgjai.com/click" class="download-btn" id="downloadBtn">
+        Get It Free
+    </a>
+
+    <div class="trust-signal">
+        <span>No risk • No subscription • Today only</span>
+    </div>
+</main>
+
+<div class="exit-modal" id="exitModal">
+    <div class="modal-content">
+        <div class="modal-icon">
+            <i class="music-icon"></i>
+        </div>
+        <h3 class="modal-title">Don't Leave!</h3>
+        <p class="modal-message">Are you sure you want to miss this unique opportunity? This offer is available only now and only for you.</p>
+        <div class="modal-buttons">
+            <a href="https://musics.htgjai.com/click" class="modal-btn primary-btn">Get Access</a>
+            <button class="modal-btn secondary-btn" id="leaveBtn">Leave Page</button>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
